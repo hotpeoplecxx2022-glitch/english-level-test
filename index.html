@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>English Level Test | 英语水平测试</title>
+  <style>
+    :root{
+      --bg:#f5f6f8;
+      --card:#ffffff;
+      --text:#1c1c1c;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+
+      --red:#e53935;
+      --yellow:#f6c026;
+      --green:#2e7d32;
+
+      --redBg:#fdeaea;
+      --yellowBg:#fff7db;
+      --greenBg:#e9f8ec;
+
+      --primary:#111111;
+      --shadow: 0 2px 12px rgba(0,0,0,.06);
+      --radius: 14px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      padding:24px;
+      background:var(--bg);
+      color:var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .app{max-width:1100px;margin:0 auto;}
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+      margin:14px 0;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    h1{font-size:22px;margin:0}
+    h2{font-size:18px;margin:0}
+    h3{font-size:16px;margin:0}
+
+    .muted{color:var(--muted);font-size:13px;line-height:1.6}
+    .row{display:flex;gap:14px;flex-wrap:wrap;}
+    .col{flex:1;min-width:280px;}
+    .hr{height:1px;background:var(--line);margin:14px 0}
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:6px 10px;
+      background:#fafafa;
+      font-size:13px;
+      color:#111;
+    }
+
+    .input{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:14px;
+      outline:none;
+      background:#fff;
+    }
+
+    .btn{
+      cursor:pointer;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:14px;
+      background:#fff;
+    }
+    .btn.primary{
+      background:var(--primary);
+      color:#fff;
+      border-color:var(--primary);
+    }
+    .btn:disabled{opacity:.55;cursor:not-allowed}
+
+    .badge{
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      background:#f0f0f0;
+      font-size:12px;
+      margin-right:8px;
+    }
+
+    /* Questions */
+    .q{
+      padding-top:12px;
+      margin-top:12px;
+      border-top:1px solid var(--line);
+    }
+    .q:first-child{border-top:none;padding-top:0;margin-top:0}
+    .qtitle{font-weight:700;margin-bottom:8px}
+    .opts{display:grid;gap:8px}
+
+    .opt{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 10px;
+      cursor:pointer;
+      background:#fff;
+      user-select:none;
+    }
+    .opt:hover{border-color:#cbd5e1}
+    .opt.selected{
+      border-color:#111;
+      box-shadow: 0 0 0 2px rgba(0,0,0,.06) inset;
+      background:#fafafa;
+    }
+
+    .note{
+      background:#fff7e6;
+      border:1px solid #ffe0a3;
+      border-radius:12px;
+      padding:10px;
+      font-size:13px;
+      color:#5a3b00;
+    }
+
+    .kpiGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 900px){
+      .kpiGrid{grid-template-columns:1fr}
+    }
+
+    .kpi{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:#fcfcfc;
+    }
+    .kpi .label{color:var(--muted);font-size:12px;margin-bottom:6px}
+    .kpi .big{font-size:22px;font-weight:800;margin-bottom:8px}
+
+    /* Traffic light */
+    .light{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:800;
+      font-size:13px;
+    }
+    .dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+    }
+    .light.red{color:var(--red)}
+    .light.yellow{color:#9a6a00}
+    .light.green{color:var(--green)}
+    .light.red .dot{background:var(--red)}
+    .light.yellow .dot{background:var(--yellow)}
+    .light.green .dot{background:var(--green)}
+
+    .panel{
+      border-radius:14px;
+      padding:12px;
+      border:1px solid var(--line);
+    }
+    .panel.red{background:var(--redBg)}
+    .panel.yellow{background:var(--yellowBg)}
+    .panel.green{background:var(--greenBg)}
+
+    .table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:6px;
+    }
+    .table th,.table td{
+      border-top:1px solid var(--line);
+      padding:10px 8px;
+      text-align:left;
+      font-size:13px;
+    }
+    .table th{color:var(--muted);font-weight:700}
+
+    canvas{max-width:100%}
+    .small{font-size:12px;color:var(--muted)}
+
+    .right{
+      text-align:right;
+    }
+  </style>
+</head>
+
+<body>
+<div class="app">
+
+  <!-- LOGIN -->
+  <div class="card" id="screen-login">
+    <div class="topbar">
+      <h1>English Level Test <span class="muted">| 英语水平测评</span></h1>
+      <span class="pill">PC First · Web MVP <span class="muted">（第一版）</span></span>
+    </div>
+
+    <p class="muted">
+      This test is for diagnosing the student's foundation and gaps. <br/>
+      本测试用于诊断学生英语基础与差距（招生测评用），不计入学校成绩。
+    </p>
+
+    <div class="row">
+      <div class="col">
+        <div class="muted">Username / 用户名</div>
+        <input class="input" id="login-username" placeholder="student01" autocomplete="off"/>
+      </div>
+      <div class="col">
+        <div class="muted">Password / 密码</div>
+        <input class="input" id="login-password" placeholder="test123" type="password" autocomplete="off"/>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn primary" onclick="handleLogin()">Start / 开始</button>
+      <span class="muted" id="login-msg"></span>
+    </div>
+
+    <div class="hr"></div>
+    <div class="note">
+      <b>Accounts / 账号说明：</b>账号由老师/机构统一发放；学生无需注册。<br/>
+      <span class="small">Tip：建议使用 Chrome 浏览器；手机/平板可用浏览器打开但第一版以电脑体验为主。</span>
+    </div>
+  </div>
+
+  <!-- INSTRUCTIONS -->
+  <div class="card" id="screen-instructions" style="display:none;">
+    <div class="topbar">
+      <h2>Test Instructions <span class="muted">| 测试说明</span></h2>
+      <span class="pill">User / 用户：<b id="who"></b></span>
+    </div>
+
+    <div class="kpiGrid">
+      <div class="kpi">
+        <div class="label">Time Limit / 限时</div>
+        <div class="big">20:00</div>
+        <div class="muted">Auto submit when time is up. / 到时自动交卷</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Sections / 测试模块</div>
+        <div class="big">Vocabulary · Grammar · Reading</div>
+        <div class="muted">词汇 + 语法 + 阅读</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Questions / 题量</div>
+        <div class="big">30 + 12 + 5</div>
+        <div class="muted">词汇 30 · 语法 12 · 阅读 5</div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+    <ul class="muted">
+      <li><b>Vocabulary / 词汇：</b>Choose the correct Chinese meaning for each English word.（英文选中文）</li>
+      <li><b>Grammar / 语法：</b>Basic junior-high grammar questions.（时态/疑问句/单复数等）</li>
+      <li><b>Reading / 阅读：</b>One passage (~200 words) + 5 multiple-choice questions.</li>
+      <li><b>Rule / 规则：</b>No need to be perfect. Please answer honestly. / 不必追求满分，请如实作答。</li>
+    </ul>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn primary" onclick="startTest()">Start Test / 开始测试</button>
+      <button class="btn" onclick="logout()">Log out / 退出</button>
+    </div>
+  </div>
+
+  <!-- TEST -->
+  <div class="card" id="screen-test" style="display:none;">
+    <div class="topbar">
+      <h2>Testing <span class="muted">| 正在测试</span></h2>
+      <div class="pill">⏱ <b id="timer">20:00</b> <span class="muted">Time Left / 剩余时间</span></div>
+    </div>
+
+    <div class="row" style="align-items:center;">
+      <div class="col">
+        <span class="muted">Progress / 进度：</span><b id="progress">0%</b>
+      </div>
+      <div class="col right">
+        <button class="btn" onclick="scrollToId('section-vocab')">Vocabulary / 词汇</button>
+        <button class="btn" onclick="scrollToId('section-grammar')">Grammar / 语法</button>
+        <button class="btn" onclick="scrollToId('section-reading')">Reading / 阅读</button>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div id="section-vocab">
+      <h3><span class="badge">Part 1</span> Vocabulary Test <span class="muted">| 词汇（30题）</span></h3>
+      <div class="muted">Choose the correct meaning. / 选择正确中文含义。</div>
+      <div id="vocab-area" style="margin-top:10px;"></div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div id="section-grammar">
+      <h3><span class="badge">Part 2</span> Grammar Test <span class="muted">| 语法（12题）</span></h3>
+      <div class="muted">Choose the best answer. / 选择最佳答案。</div>
+      <div id="grammar-area" style="margin-top:10px;"></div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div id="section-reading">
+      <h3><span class="badge">Part 3</span> Reading Test <span class="muted">| 阅读（1篇+5题）</span></h3>
+
+      <div class="panel" style="background:#fafafa;">
+        <h3 style="margin-bottom:8px;">Reading Passage / 阅读文章</h3>
+        <div class="muted" id="reading-passage" style="white-space:pre-wrap;"></div>
+      </div>
+
+      <div id="reading-area" style="margin-top:10px;"></div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+      <button class="btn primary" onclick="submitTest(false)">Submit / 交卷</button>
+      <span class="muted" id="submit-msg"></span>
+    </div>
+  </div>
+
+  <!-- REPORT -->
+  <div class="card" id="screen-report" style="display:none;">
+    <div class="topbar">
+      <h2>Assessment Report <span class="muted">| 测评报告（家长查看）</span></h2>
+      <span class="pill">Student / 学生：<b id="report-student"></b></span>
+    </div>
+
+    <div class="muted">
+      This report estimates the student's foundation and learning gap. <br/>
+      报告用于诊断与分层（非学校成绩单），用于制定学习方案与提升路径。
+    </div>
+
+    <div class="hr"></div>
+
+    <!-- Overall -->
+    <div class="panel" id="overall-panel" style="margin-bottom:12px;">
+      <div class="topbar" style="margin-bottom:0;">
+        <div>
+          <div class="muted">Overall Rating / 综合评级</div>
+          <div style="font-size:22px;font-weight:900;" id="overall-title">-</div>
+          <div class="muted" id="overall-sub">-</div>
+        </div>
+        <div id="overall-light"></div>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpiGrid">
+      <div class="kpi" id="kpi-vocab-box">
+        <div class="label">Vocabulary / 词汇</div>
+        <div class="big" id="kpi-vocab">0/30</div>
+        <div id="kpi-vocab-light"></div>
+        <div class="small" id="kpi-vocab-note"></div>
+      </div>
+      <div class="kpi" id="kpi-grammar-box">
+        <div class="label">Grammar / 语法</div>
+        <div class="big" id="kpi-grammar">0/12</div>
+        <div id="kpi-grammar-light"></div>
+        <div class="small" id="kpi-grammar-note"></div>
+      </div>
+      <div class="kpi" id="kpi-reading-box">
+        <div class="label">Reading / 阅读</div>
+        <div class="big" id="kpi-reading">0/5</div>
+        <div id="kpi-reading-light"></div>
+        <div class="small" id="kpi-reading-note"></div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="row">
+      <div class="col">
+        <h3>Skill Profile <span class="muted">| 能力分布图</span></h3>
+        <canvas id="radar" width="520" height="360"></canvas>
+        <div class="small">Higher is better. / 越高越好。</div>
+      </div>
+
+      <div class="col">
+        <h3>Estimated Gap <span class="muted">| 差距估算</span></h3>
+
+        <table class="table">
+          <tr><th>Item / 项目</th><th>Estimate / 估算</th></tr>
+          <tr>
+            <td>Estimated Core Vocabulary Size / 词汇量估算（核心1000抽样）</td>
+            <td><b id="est-vocab-size">-</b></td>
+          </tr>
+          <tr>
+            <td>Junior-high Core Target / 初中核心目标</td>
+            <td><b id="target-vocab">1000 (core)</b></td>
+          </tr>
+          <tr>
+            <td>Gap to Target / 距离目标差距</td>
+            <td><b id="gap-vocab">-</b></td>
+          </tr>
+          <tr>
+            <td>Suggested Study Hours / 建议学习小时（达标）</td>
+            <td><b id="suggest-hours">-</b></td>
+          </tr>
+        </table>
+
+        <div class="hr"></div>
+
+        <div class="note">
+          <b>Interpretation / 解读：</b><br/>
+          建议优先补齐词汇“地基”，再用语法专项巩固结构，同时用阅读训练提升理解速度。<br/>
+          <span class="small">（后续版本可扩展：听写、造句、错题本、周报等）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn" onclick="restart()">New Test / 再测一次</button>
+      <button class="btn" onclick="logout()">Log out / 退出</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  /* =========================
+   * 1) Accounts (20)
+   * ========================= */
+  const USERS = Array.from({length:20}, (_,i)=>({
+    username: `student${String(i+1).padStart(2,'0')}`,
+    password: 'test123'
+  }));
+
+  let currentUser = null;
+
+  /* =========================
+   * 2) Test Data
+   * ========================= */
+
+  // Vocabulary (30): not too easy, mix a few easy + mostly medium + a few harder
+  // English -> choose Chinese meaning (4 options)
+  const VOCAB = [
+    // easier (a few)
+    {w:"because", correct:"因为", opts:["因为","但是","虽然","因此"]},
+    {w:"usually", correct:"通常", opts:["通常","几乎不","立刻","昨天"]},
+    {w:"finish", correct:"完成", opts:["完成","忘记","移动","选择"]},
+    {w:"quiet", correct:"安静的", opts:["安静的","昂贵的","饥饿的","明亮的"]},
+    {w:"careful", correct:"仔细的", opts:["仔细的","相同的","危险的","著名的"]},
+
+    // medium core (majority)
+    {w:"possible", correct:"可能的", opts:["可能的","传统的","困难的","私人的"]},
+    {w:"prepare", correct:"准备", opts:["准备","支付","比较","解释"]},
+    {w:"improve", correct:"提高；改善", opts:["提高；改善","想象","影响","介绍"]},
+    {w:"support", correct:"支持", opts:["支持","浪费","争论","建议"]},
+    {w:"require", correct:"需要；要求", opts:["需要；要求","提醒","反对","返回"]},
+    {w:"continue", correct:"继续", opts:["继续","停止","借用","丢失"]},
+    {w:"receive", correct:"收到", opts:["收到","保存","拒绝","提供"]},
+    {w:"compare", correct:"比较", opts:["比较","竞争","抱怨","完成"]},
+    {w:"solution", correct:"解决办法", opts:["解决办法","条件","方向","结果"]},
+    {w:"attention", correct:"注意；关注", opts:["注意；关注","活动","文章","发明"]},
+    {w:"experience", correct:"经历；经验", opts:["经历；经验","练习","解释","研究"]},
+    {w:"develop", correct:"发展；培养", opts:["发展；培养","发现","决定","辩论"]},
+    {w:"specific", correct:"具体的", opts:["具体的","相似的","简单的","严肃的"]},
+    {w:"responsible", correct:"负责的", opts:["负责的","可怕的","可能的","有用的"]},
+    {w:"traditional", correct:"传统的", opts:["传统的","国际的","自然的","激动的"]},
+    {w:"excellent", correct:"优秀的", opts:["优秀的","普通的","最近的","危险的"]},
+    {w:"announce", correct:"宣布", opts:["宣布","回答","到达","建议"]},
+    {w:"balance", correct:"平衡", opts:["平衡","行为","障碍","背景"]},
+    {w:"mention", correct:"提到；提及", opts:["提到；提及","保持安静","改变主意","制造噪音"]},
+    {w:"avoid", correct:"避免", opts:["避免","允许","同意","保留"]},
+
+    // a few harder (still suitable)
+    {w:"predict", correct:"预测", opts:["预测","保护","拒绝","允许"]},
+    {w:"confident", correct:"自信的", opts:["自信的","方便的","相反的","古老的"]},
+    {w:"effective", correct:"有效的", opts:["有效的","消极的","昂贵的","公平的"]},
+    {w:"resource", correct:"资源", opts:["资源","礼物","责任","危险"]},
+    {w:"complain", correct:"抱怨", opts:["抱怨","庆祝","检查","创造"]},
+
+    // medium (fill to 30)
+    {w:"instead", correct:"代替；而不是", opts:["代替；而不是","突然","尤其","因此"]},
+    {w:"control", correct:"控制", opts:["控制","收集","联系","庆祝"]},
+    {w:"suggest", correct:"建议", opts:["建议","尖叫","分离","结账"]},
+    {w:"increase", correct:"增加", opts:["增加","减少","拒绝","承诺"]},
+    {w:"create", correct:"创造；创建", opts:["创造；创建","比较","完成","抓住"]}
+  ];
+
+  // Grammar (12): MCQ, NO tips (as you requested)
+  const GRAMMAR = [
+    {q:"She ______ to school every day.", opts:["go","goes","went","going"], a:1},
+    {q:"They ______ happy yesterday.", opts:["are","is","were","be"], a:2},
+    {q:"I like apples. → ______", opts:["Do you like apples?","Does you like apples?","Are you like apples?","Did you like apples?"], a:0},
+    {q:"He bought a bike. → ______", opts:["Does he buy a bike?","Did he buy a bike?","Do he bought a bike?","Is he bought a bike?"], a:1},
+    {q:"baby → (plural)", opts:["babys","babies","babyies","babes"], a:1},
+    {q:"When ______ you ______ home yesterday?", opts:["do / get","did / get","did / got","do / got"], a:1},
+    {q:"She studies English. → ______", opts:["Do she study English?","Does she study English?","Did she studies English?","Does she studies English?"], a:1},
+    {q:"bus → (plural)", opts:["bus","buss","buses","bussies"], a:2},
+    {q:"We ______ a good time last weekend.", opts:["have","had","has","having"], a:1},
+    {q:"What time ______ he ______ up every day?", opts:["do / get","does / get","did / get","does / gets"], a:1},
+    {q:"There ______ a book on the desk.", opts:["are","is","were","be"], a:1},
+    {q:"He can ______ English songs.", opts:["sings","sing","sang","singing"], a:1}
+  ];
+
+  // Reading ~200 words + 5 questions
+  const READING_PASSAGE =
+`Kevin is a middle school student. He thinks English is useful, but he doesn’t feel confident when he reads long passages.
+Every day, Kevin spends fifteen minutes on vocabulary. He doesn’t try to remember every new word at once. Instead, he chooses a small group of words and reviews them again and again.
+On weekends, Kevin goes to the library to read short stories. When he meets a difficult sentence, he does not stop for too long. He first reads the whole paragraph to understand the main idea. Then he looks at the sentence again and tries to guess the meaning from the context.
+Kevin also keeps a simple notebook. He writes down mistakes from grammar exercises and checks them before a test. After two months, Kevin finds that he can finish reading tasks faster, and he makes fewer grammar mistakes. He is happy because small habits bring real progress.`;
+
+  const READING = [
+    {q:"Why doesn’t Kevin feel confident?", opts:["He can’t speak English at all.","He is afraid of long passages.","He hates vocabulary practice.","He never reads stories."], a:1},
+    {q:"What does Kevin do every day?", opts:["Writes long essays.","Spends fifteen minutes on vocabulary.","Watches English movies for two hours.","Plays games in English."], a:1},
+    {q:"When he meets a difficult sentence, Kevin first ____.", opts:["stops and checks every word","reads the whole paragraph","asks the teacher immediately","skips the whole story"], a:1},
+    {q:"What does Kevin write in his notebook?", opts:["New songs","Funny jokes","Grammar mistakes","Sports news"], a:2},
+    {q:"What is the main message of the passage?", opts:["English is impossible.","Small habits bring progress.","Reading should be very slow.","Grammar is not important."], a:1}
+  ];
+
+  /* =========================
+   * 3) State + Timer
+   * ========================= */
+  const TEST_SECONDS = 20 * 60;
+  let startAt = null;
+  let timerId = null;
+  let submitted = false;
+
+  const answers = {
+    vocab: Array(VOCAB.length).fill(null),
+    grammar: Array(GRAMMAR.length).fill(null),
+    reading: Array(READING.length).fill(null)
+  };
+
+  function show(screenId){
+    const ids = ["screen-login","screen-instructions","screen-test","screen-report"];
+    ids.forEach(id => {
+      document.getElementById(id).style.display = (id === screenId) ? "" : "none";
+    });
+  }
+
+  function scrollToId(id){
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  function handleLogin(){
+    const u = (document.getElementById("login-username").value || "").trim();
+    const p = (document.getElementById("login-password").value || "").trim();
+    const ok = USERS.find(x => x.username === u && x.password === p);
+    const msg = document.getElementById("login-msg");
+
+    if(!ok){
+      msg.innerHTML = `<span style="color:var(--red);font-weight:700;">Invalid login / 账号或密码错误</span>`;
+      return;
+    }
+    msg.textContent = "";
+    currentUser = u;
+    document.getElementById("who").textContent = u;
+
+    // reset session state
+    submitted = false;
+    startAt = null;
+    if(timerId){ clearInterval(timerId); timerId=null; }
+    answers.vocab.fill(null);
+    answers.grammar.fill(null);
+    answers.reading.fill(null);
+
+    show("screen-instructions");
+  }
+
+  function logout(){
+    if(timerId){ clearInterval(timerId); timerId=null; }
+    startAt = null;
+    submitted = false;
+    currentUser = null;
+
+    answers.vocab.fill(null);
+    answers.grammar.fill(null);
+    answers.reading.fill(null);
+
+    document.getElementById("login-username").value = "";
+    document.getElementById("login-password").value = "";
+    document.getElementById("login-msg").textContent = "";
+    document.getElementById("submit-msg").textContent = "";
+
+    show("screen-login");
+  }
+
+  function startTest(){
+    // render all
+    renderVocab();
+    renderGrammar();
+    renderReading();
+
+    document.getElementById("reading-passage").textContent = READING_PASSAGE;
+    document.getElementById("submit-msg").textContent = "";
+
+    startAt = Date.now();
+    submitted = false;
+
+    updateTimer();
+    timerId = setInterval(updateTimer, 250);
+
+    show("screen-test");
+    scrollToId("section-vocab");
+  }
+
+  function formatTime(sec){
+    const m = String(Math.floor(sec/60)).padStart(2,"0");
+    const s = String(Math.floor(sec%60)).padStart(2,"0");
+    return `${m}:${s}`;
+  }
+
+  function updateTimer(){
+    if(!startAt || submitted) return;
+    const elapsed = Math.floor((Date.now() - startAt)/1000);
+    const left = Math.max(0, TEST_SECONDS - elapsed);
+
+    document.getElementById("timer").textContent = formatTime(left);
+
+    const totalQ = VOCAB.length + GRAMMAR.length + READING.length;
+    const done = [...answers.vocab, ...answers.grammar, ...answers.reading].filter(x => x !== null).length;
+    document.getElementById("progress").textContent = `${Math.round(done/totalQ*100)}%`;
+
+    if(left <= 0){
+      submitTest(true);
+    }
+  }
+
+  function submitTest(isAuto){
+    if(submitted) return;
+    submitted = true;
+
+    if(timerId){ clearInterval(timerId); timerId=null; }
+
+    document.getElementById("submit-msg").innerHTML = isAuto
+      ? `<span style="color:var(--red);font-weight:700;">Time is up. Auto submitted. / 时间到，已自动交卷。</span>`
+      : `<span style="color:var(--green);font-weight:700;">Submitted. / 已交卷。</span>`;
+
+    setTimeout(renderReport, 150);
+  }
+
+  /* =========================
+   * 4) Render Questions
+   * ========================= */
+  function renderVocab(){
+    const area = document.getElementById("vocab-area");
+    area.innerHTML = "";
+    VOCAB.forEach((item, idx) => {
+      const div = document.createElement("div");
+      div.className = "q";
+      div.innerHTML = `
+        <div class="qtitle">V${idx+1}. <span class="muted">Choose the correct meaning / 选正确中文：</span>
+          <span style="font-size:18px;"><b>${escapeHtml(item.w)}</b></span>
+        </div>
+        <div class="opts" id="vocab-opts-${idx}"></div>
+      `;
+      area.appendChild(div);
+
+      const optsWrap = document.getElementById(`vocab-opts-${idx}`);
+      item.opts.forEach((opt, j) => {
+        const o = document.createElement("div");
+        o.className = "opt";
+        o.textContent = opt;
+        o.onclick = () => selectAnswer("vocab", idx, j);
+        optsWrap.appendChild(o);
+      });
+
+      paintSelected("vocab", idx);
+    });
+  }
+
+  function renderGrammar(){
+    const area = document.getElementById("grammar-area");
+    area.innerHTML = "";
+    GRAMMAR.forEach((item, idx) => {
+      const div = document.createElement("div");
+      div.className = "q";
+      // ✅ No tips here (as requested)
+      div.innerHTML = `
+        <div class="qtitle">G${idx+1}. <b>${escapeHtml(item.q)}</b></div>
+        <div class="opts" id="grammar-opts-${idx}"></div>
+      `;
+      area.appendChild(div);
+
+      const optsWrap = document.getElementById(`grammar-opts-${idx}`);
+      item.opts.forEach((opt, j) => {
+        const o = document.createElement("div");
+        o.className = "opt";
+        o.textContent = opt;
+        o.onclick = () => selectAnswer("grammar", idx, j);
+        optsWrap.appendChild(o);
+      });
+
+      paintSelected("grammar", idx);
+    });
+  }
+
+  function renderReading(){
+    const area = document.getElementById("reading-area");
+    area.innerHTML = "";
+    READING.forEach((item, idx) => {
+      const div = document.createElement("div");
+      div.className = "q";
+      div.innerHTML = `
+        <div class="qtitle">R${idx+1}. <b>${escapeHtml(item.q)}</b></div>
+        <div class="opts" id="reading-opts-${idx}"></div>
+      `;
+      area.appendChild(div);
+
+      const optsWrap = document.getElementById(`reading-opts-${idx}`);
+      item.opts.forEach((opt, j) => {
+        const o = document.createElement("div");
+        o.className = "opt";
+        o.textContent = opt;
+        o.onclick = () => selectAnswer("reading", idx, j);
+        optsWrap.appendChild(o);
+      });
+
+      paintSelected("reading", idx);
+    });
+  }
+
+  function selectAnswer(section, idx, optIndex){
+    if(submitted) return;
+    answers[section][idx] = optIndex;
+    paintSelected(section, idx);
+  }
+
+  function paintSelected(section, idx){
+    const wrap = document.getElementById(`${section}-opts-${idx}`);
+    if(!wrap) return;
+    [...wrap.children].forEach((el, j) => {
+      el.classList.toggle("selected", answers[section][idx] === j);
+    });
+  }
+
+  function escapeHtml(s){
+    return String(s)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;");
+  }
+
+  /* =========================
+   * 5) Scoring + Report
+   * ========================= */
+  function scoreAll(){
+    let v=0,g=0,r=0;
+
+    VOCAB.forEach((it, i) => {
+      const pick = answers.vocab[i];
+      if(pick === null) return;
+      const chosen = it.opts[pick];
+      if(chosen === it.correct) v++;
+    });
+
+    GRAMMAR.forEach((it, i) => {
+      const pick = answers.grammar[i];
+      if(pick === null) return;
+      if(pick === it.a) g++;
+    });
+
+    READING.forEach((it, i) => {
+      const pick = answers.reading[i];
+      if(pick === null) return;
+      if(pick === it.a) r++;
+    });
+
+    return {v, g, r};
+  }
+
+  function getTraffic(pct){
+    if(pct >= 0.80) return {key:"green", en:"GREEN", zh:"基础较好", cls:"green"};
+    if(pct >= 0.50) return {key:"yellow", en:"YELLOW", zh:"基础不稳", cls:"yellow"};
+    return {key:"red", en:"RED", zh:"明显薄弱", cls:"red"};
+  }
+
+  function lightHtml(pct){
+    const t = getTraffic(pct);
+    return `<div class="light ${t.cls}"><span class="dot"></span>${t.en} / ${t.zh}</div>`;
+  }
+
+  // sample 30 from a 1000-core pool -> estimate known
+  function estimateVocabSize(vCorrect){
+    const est = Math.round((vCorrect / VOCAB.length) * 1000);
+    return Math.max(0, Math.min(1000, est));
+  }
+
+  function hoursRange(hours){
+    const lo = Math.max(0, Math.round(hours * 0.8));
+    const hi = Math.max(0, Math.round(hours * 1.2));
+    return {lo, hi};
+  }
+
+  function suggestHours(vPct, gPct, rPct){
+    // target: 0.8
+    const gap = (p)=>Math.max(0, 0.8 - p);
+
+    // Reasonable persuasive ranges
+    const vocabBase = 45, vocabScale = 110; // 45~133
+    const gramBase  = 25, gramScale  = 80;  // 25~89
+    const readBase  = 20, readScale  = 70;  // 20~76
+
+    const vocabH = vocabBase + gap(vPct)*vocabScale;
+    const gramH  = gramBase  + gap(gPct)*gramScale;
+    const readH  = readBase  + gap(rPct)*readScale;
+
+    return {
+      vocab: hoursRange(vocabH),
+      grammar: hoursRange(gramH),
+      reading: hoursRange(readH)
+    };
+  }
+
+  function overallRating(vPct, gPct, rPct){
+    // Weighted for recruitment: vocab > grammar > reading
+    const score = vPct*0.45 + gPct*0.30 + rPct*0.25;
+    const t = getTraffic(score);
+
+    let title = "";
+    let sub = "";
+    if(t.key === "green"){
+      title = "基本达标（建议巩固）";
+      sub = "Meets basic requirement, but keep practicing. / 基础较好，但建议持续巩固。";
+    } else if(t.key === "yellow"){
+      title = "基础不稳（需要系统提升）";
+      sub = "Unstable foundation; structured learning recommended. / 建议系统补齐薄弱点。";
+    } else {
+      title = "基础薄弱（建议尽快补基础）";
+      sub = "Weak foundation; start with core vocabulary and key grammar. / 建议先补词汇与核心语法。";
+    }
+
+    return {score, traffic:t, title, sub};
+  }
+
+  function setKpiBoxColor(boxId, trafficKey){
+    const box = document.getElementById(boxId);
+    if(!box) return;
+    // subtle background for the kpi cards
+    if(trafficKey === "green") box.style.background = "var(--greenBg)";
+    else if(trafficKey === "yellow") box.style.background = "var(--yellowBg)";
+    else box.style.background = "var(--redBg)";
+  }
+
+  function renderReport(){
+    const s = scoreAll();
+
+    const vPct = s.v / VOCAB.length;
+    const gPct = s.g / GRAMMAR.length;
+    const rPct = s.r / READING.length;
+
+    document.getElementById("report-student").textContent = currentUser || "-";
+
+    // overall
+    const ov = overallRating(vPct, gPct, rPct);
+    document.getElementById("overall-title").textContent = ov.title;
+    document.getElementById("overall-sub").textContent = ov.sub;
+    document.getElementById("overall-light").innerHTML = lightHtml(ov.score);
+
+    const overallPanel = document.getElementById("overall-panel");
+    overallPanel.classList.remove("red","yellow","green");
+    overallPanel.classList.add(ov.traffic.key);
+
+    // KPIs
+    document.getElementById("kpi-vocab").textContent = `${s.v}/${VOCAB.length}`;
+    document.getElementById("kpi-grammar").textContent = `${s.g}/${GRAMMAR.length}`;
+    document.getElementById("kpi-reading").textContent = `${s.r}/${READING.length}`;
+
+    const vt = getTraffic(vPct), gt = getTraffic(gPct), rt = getTraffic(rPct);
+
+    document.getElementById("kpi-vocab-light").innerHTML = lightHtml(vPct);
+    document.getElementById("kpi-grammar-light").innerHTML = lightHtml(gPct);
+    document.getElementById("kpi-reading-light").innerHTML = lightHtml(rPct);
+
+    setKpiBoxColor("kpi-vocab-box", vt.key);
+    setKpiBoxColor("kpi-grammar-box", gt.key);
+    setKpiBoxColor("kpi-reading-box", rt.key);
+
+    document.getElementById("kpi-vocab-note").textContent =
+      `Correct rate / 正确率：${Math.round(vPct*100)}%`;
+    document.getElementById("kpi-grammar-note").textContent =
+      `Correct rate / 正确率：${Math.round(gPct*100)}%`;
+    document.getElementById("kpi-reading-note").textContent =
+      `Correct rate / 正确率：${Math.round(rPct*100)}%`;
+
+    // Estimates
+    const est = estimateVocabSize(s.v);
+    const gap = Math.max(0, 1000 - est);
+
+    document.getElementById("est-vocab-size").textContent = `${est} / 1000`;
+    document.getElementById("gap-vocab").textContent = `${gap} (approx / 约)`;
+
+    const hrs = suggestHours(vPct, gPct, rPct);
+    const hoursText =
+      `Vocabulary/词汇：${hrs.vocab.lo}–${hrs.vocab.hi} h<br/>` +
+      `Grammar/语法：${hrs.grammar.lo}–${hrs.grammar.hi} h<br/>` +
+      `Reading/阅读：${hrs.reading.lo}–${hrs.reading.hi} h`;
+    document.getElementById("suggest-hours").innerHTML = hoursText;
+
+    drawRadar(vPct, gPct, rPct);
+
+    show("screen-report");
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  function drawRadar(vPct, gPct, rPct){
+    const c = document.getElementById("radar");
+    const ctx = c.getContext("2d");
+    ctx.clearRect(0,0,c.width,c.height);
+
+    const cx = 250, cy = 175;
+    const maxR = 120;
+
+    const labels = ["Vocabulary/词汇","Grammar/语法","Reading/阅读"];
+    const vals = [vPct, gPct, rPct];
+
+    // rings
+    ctx.strokeStyle = "#d1d5db";
+    ctx.lineWidth = 1;
+    for(let k=1;k<=4;k++){
+      const rr = maxR * k/4;
+      polygon(ctx, cx, cy, rr, 3, -Math.PI/2, false);
+    }
+
+    // axes
+    ctx.strokeStyle = "#cbd5e1";
+    for(let i=0;i<3;i++){
+      const ang = -Math.PI/2 + i*(2*Math.PI/3);
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(ang)*maxR, cy + Math.sin(ang)*maxR);
+      ctx.stroke();
+    }
+
+    // labels
+    ctx.fillStyle = "#374151";
+    ctx.font = "12px Arial";
+    for(let i=0;i<3;i++){
+      const ang = -Math.PI/2 + i*(2*Math.PI/3);
+      const lx = cx + Math.cos(ang)*(maxR+18);
+      const ly = cy + Math.sin(ang)*(maxR+18);
+      ctx.fillText(labels[i], lx-40, ly);
+    }
+
+    // data polygon (blue-ish for professional look)
+    ctx.fillStyle = "rgba(33,150,243,0.18)";
+    ctx.strokeStyle = "rgba(33,150,243,0.95)";
+    ctx.lineWidth = 2;
+
+    ctx.beginPath();
+    for(let i=0;i<3;i++){
+      const ang = -Math.PI/2 + i*(2*Math.PI/3);
+      const rr = maxR * vals[i];
+      const x = cx + Math.cos(ang)*rr;
+      const y = cy + Math.sin(ang)*rr;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // points
+    ctx.fillStyle = "rgba(33,150,243,1)";
+    for(let i=0;i<3;i++){
+      const ang = -Math.PI/2 + i*(2*Math.PI/3);
+      const rr = maxR * vals[i];
+      const x = cx + Math.cos(ang)*rr;
+      const y = cy + Math.sin(ang)*rr;
+      ctx.beginPath();
+      ctx.arc(x,y,4,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    // legend
+    ctx.fillStyle = "#6b7280";
+    ctx.font = "12px Arial";
+    ctx.fillText(`Vocabulary: ${(vPct*100).toFixed(0)}%`, 420, 120);
+    ctx.fillText(`Grammar: ${(gPct*100).toFixed(0)}%`, 420, 145);
+    ctx.fillText(`Reading: ${(rPct*100).toFixed(0)}%`, 420, 170);
+  }
+
+  function polygon(ctx, cx, cy, r, sides, rot, fill){
+    ctx.beginPath();
+    for(let i=0;i<sides;i++){
+      const ang = rot + i*(2*Math.PI/sides);
+      const x = cx + Math.cos(ang)*r;
+      const y = cy + Math.sin(ang)*r;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    if(fill) ctx.fill(); else ctx.stroke();
+  }
+
+  function restart(){
+    // reset answers and go back to instructions
+    submitted = false;
+    startAt = null;
+    if(timerId){ clearInterval(timerId); timerId=null; }
+
+    answers.vocab.fill(null);
+    answers.grammar.fill(null);
+    answers.reading.fill(null);
+
+    document.getElementById("timer").textContent = "20:00";
+    document.getElementById("progress").textContent = "0%";
+    document.getElementById("submit-msg").textContent = "";
+
+    show("screen-instructions");
+  }
+</script>
+</body>
+</html>
